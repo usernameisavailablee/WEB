@@ -165,6 +165,8 @@ fadeImage.addEventListener("mouseleave", () => {
     textBehind.style.opacity = "0";
 });
 
+//9
+
 const emailInput = document.getElementById("email");
 
 emailInput.addEventListener("input", () => {
@@ -175,5 +177,37 @@ emailInput.addEventListener("input", () => {
         emailInput.classList.remove("invalid");
     } else {
         emailInput.classList.add("invalid");
+    }
+});
+
+const passwordInput = document.getElementById("password");
+const confirmPasswordInput = document.getElementById("confirmPassword");
+
+const validatePassword = () => {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    if (password !== confirmPassword) {
+        alert("Пароли не совпадают.");
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert("Пароль должен содержать не менее 8 символов.");
+        return false;
+    }
+
+    if (!/\d/.test(password)) {
+        alert("Пароль должен содержать хотя бы одну цифру.");
+        return false;
+    }
+
+    return true;
+};
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+    if (!validatePassword()) {
+        event.preventDefault(); // Отменить отправку формы при невалидном пароле
     }
 });
