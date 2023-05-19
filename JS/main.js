@@ -213,4 +213,34 @@ form.addEventListener("submit", (event) => {
 });
 
 //10
+//11
+// Игра "Камень, ножницы, бумага"
+function rockPaperScissorsGame() {
+    const choices = ["камень", "ножницы", "бумага"];
+    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+    const userChoice = prompt("Выберите: камень, ножницы или бумага:").toLowerCase();
+
+    if (!choices.includes(userChoice)) {
+        alert("Пожалуйста, выберите из предложенных вариантов: камень, ножницы или бумага.");
+        return;
+    }
+
+    alert(`Вы выбрали: ${userChoice}\nКомпьютер выбрал: ${computerChoice}`);
+
+    if (userChoice === computerChoice) {
+        alert("Ничья!");
+    } else if (
+        (userChoice === "камень" && computerChoice === "ножницы") ||
+        (userChoice === "ножницы" && computerChoice === "бумага") ||
+        (userChoice === "бумага" && computerChoice === "камень")
+    ) {
+        alert("Вы выиграли!");
+    } else {
+        alert("Компьютер выиграл!");
+    }
+}
+
+// Вызов игры "Камень, ножницы, бумага"
+rockPaperScissorsGame();
 
