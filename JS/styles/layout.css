@@ -1,9 +1,9 @@
-
 body {
     background-color: #e1f5f4;
     color: #4e4429;
     font-family: "Open Sans Condensed", sans-serif;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ main {
     justify-content: start;
     grid-area: main;
     min-height: 100vh;
-    background: linear-gradient(yellow,blue);
+    background: linear-gradient(yellow, blue);
 }
 
 footer {
@@ -36,16 +36,15 @@ section {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
-    "header"
-    "main"
-    "footer";
+        "header"
+        "main"
+        "footer";
 }
 
 .flex-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .logo {
@@ -76,6 +75,7 @@ section {
     background: #0d5a64c8;
     transition: 0.2s;
 }
+
 .animated-block {
     width: 200px;
     height: 200px;
@@ -89,12 +89,12 @@ section {
     opacity: 0;
 }
 
-
 #dateTimeBtn {
     color: black;
     font-style: normal;
     text-decoration: underline;
 }
+
 #menuList {
     display: none;
 }
@@ -140,6 +140,7 @@ section {
 input[type="email"].invalid {
     border-color: red;
 }
+
 form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -148,20 +149,49 @@ form {
 
 label {
     grid-column: 1 / span 2;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-input,
-select,
+input[type="email"],
+input[type="password"],
 textarea {
     width: 100%;
-    padding: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
 }
 
-button {
-    grid-column: 1 / span 2;
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #4e4429;
+}
+
+#checkboxSkills {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#checkboxSkills label {
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+button[type="submit"] {
     padding: 10px;
     background-color: #4e4429;
     color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #654f3b;
+}
+
+.invalid {
+    border-color: red;
 }
