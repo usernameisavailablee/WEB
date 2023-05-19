@@ -7,7 +7,6 @@ body {
 header {
     display: flex;
     align-items: center;
-
     grid-area: header;
 }
 
@@ -15,7 +14,7 @@ main {
     justify-content: start;
     grid-area: main;
     min-height: 100vh;
-    background: linear-gradient(blue,yellow);
+    background: linear-gradient(yellow,blue);
 }
 
 footer {
@@ -76,4 +75,93 @@ section {
 .btn:hover {
     background: #0d5a64c8;
     transition: 0.2s;
+}
+.animated-block {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    opacity: 1;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.animated-block.animate {
+    transform: scale(0.5);
+    opacity: 0;
+}
+
+
+#dateTimeBtn {
+    color: black;
+    font-style: normal;
+    text-decoration: underline;
+}
+#menuList {
+    display: none;
+}
+
+#message {
+    display: none;
+}
+
+.image-container {
+    position: relative;
+}
+
+.fade-image {
+    width: 300px;
+    height: auto;
+    transition: opacity 0.5s;
+}
+
+.text-behind {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: auto;
+    background-color: rgba(245, 40, 145, 0.6);
+    padding: 10px;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.text-behind p {
+    margin: 0;
+}
+
+.fade-image:hover {
+    opacity: 0.5;
+}
+
+.fade-image:hover + .text-behind {
+    opacity: 1;
+}
+
+input[type="email"].invalid {
+    border-color: red;
+}
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+label {
+    grid-column: 1 / span 2;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 5px;
+}
+
+button {
+    grid-column: 1 / span 2;
+    padding: 10px;
+    background-color: #4e4429;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }

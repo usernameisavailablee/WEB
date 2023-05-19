@@ -1,100 +1,136 @@
-export function createCalendar(element_id) {
-    const elem = document.getElementById(element_id);
-
-
-    let shell = document.createElement("div");
-    let calender = document.createElement("div");
-    let monthName = document.createElement("div");
-    calender.className = "calender";
-    shell.className = "shell";
-    monthName.className = "monthName";
-
-    const date = getDate();
-    for (const val in date) {
-        calender.insertAdjacentHTML("beforeend", "<div>" + date[val] + "</div>");
+export class Calendar {
+    constructor(container) {
+        this.container = container;
+        this.date = new Date();
     }
 
-    let date_now = new Date();//
-    const mm = getNameMonth(date_now.getMonth());
-    const curDate = date_now.getDate();
+    render() {
+        const calendarTable = document.createElement("div");
+        calendarTable.classList.add("calender");
 
-    monthName.innerHTML = `${mm}`;
+        // Создаем заголовок календаря
+        const calendarHeader = document.createElement("div");
+        calendarHeader.classList.add("calendarHeader");
 
-    const countDaysLastMonth = getCountDaysLastMonth(date_now);
-    const countDaysCurMonth = getCountDaysCurMonth(date_now);
-    const day_name = getDayName(date_now);
+        const prevMonthButton = document.createElement("button");
+        prevMonthButton.textContent = "<<";
+        prevMonthButton.addEventListener("click", this.prevMonth.bind(this));
+        prevMonthButton.classList.add("Monthbutton");
+        calendarHeader.append(prevMonthButton);
 
-    if (day_name == 0) day_name = 7;
+        const monthName = document.createElement("span");
+        monthName.classList.add("monthName");
+        monthName.textContent =
+            this.getMonthName(this.date.getMonth()) + " " + this.date.getFullYear();
+        calendarHeader.append(monthName);
 
-    for (let i = 2 - day_name; i <= 43 - day_name; i++) {
-        if (i > 0 && i <= countDaysCurMonth)
-            calender.insertAdjacentHTML("beforeend", "<div >" + i + "</div>");
-        else if (i <= 0)
-            calender.insertAdjacentHTML(
-                "beforeend",
-                '<div class="notDayInMonth">' + (countDaysLastMonth + i) + "</div>"
-            );
-        else
-            calender.insertAdjacentHTML(
-                "beforeend",
-                '<div class="notDayInMonth">' + (i - countDaysCurMonth) + "</div>"
-            );
+        const nextMonthButton = document.createElement("button");
+        nextMonthButton.textContent = ">>";
+        nextMonthButton.addEventListener("click", this.nextMonth.bind(this));
+        nextMonthButton.classList.add("Monthbutton");
+        calendarHeader.append(nextMonthButton);
+
+        calendarTable.append(calendarHeader);
+
+        // Создаем тело календаря
+        const calendarBody = document.createElement("div");
+        calendarBody.classList.add("calendarBody");
+
+        this.getWeekDays().forEach((element) => {
+            const cell = document.createElement("div");
+            cell.textContent = element;
+            cell.classList.add("weekDays");
+            calendarBody.append(cell);
+        });
+
+        const daysInMonth = this.getDaysInMonth(
+            this.date.getMonth(),
+            this.date.getFullYear()
+        );
+        console.log(this.date.getDay());
+        let dayCounter = 1;
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 7; j++) {
+                const cell = document.createElement("div");
+                if (i === 0 && j < this.date.getDay()) {
+                    // Если ячейка принадлежит предыдущему месяцу
+                    const prevMonthDays = this.getDaysInMonth(
+                        this.date.getMonth() - 1,
+                        this.date.getFullYear()
+                    );
+                    cell.textContent = prevMonthDays - (this.date.getDay() - j - 1);
+                    cell.classList.add("prevMonth", "monthDay");
+                } else if (dayCounter > daysInMonth) {
+                    // Если мы прошли все дни этого месяца
+                    cell.textContent = dayCounter - daysInMonth;
+                    cell.classList.add("nextMonth", "monthDay");
+                    dayCounter++;
+                } else {
+                    // Эта ячейка принадлежит текущему месяцу
+                    cell.textContent = dayCounter;
+                    cell.classList.add("currentMonth", "monthDay");
+                    dayCounter++;
+                }
+                calendarBody.append(cell);
+            }
+        }
+
+        // let l = calendarBody.querySelectorAll("div");
+        // l[curDate + 5 + day_name].classList.add("currentDay");
+        // for (let index = 0; index < l.length; index++) {
+        //   if (index % 7 == 5 || index % 7 == 6) l[index].classList.add("weekend");
+        // }
+
+        calendarTable.append(calendarBody);
+        this.container.append(calendarTable);
     }
 
-    let l = calender.querySelectorAll("div");
-    l[curDate + 5 + day_name].classList.add("currentDate");
-    for (let index = 0; index < l.length; index++) {
-        if (index % 7 == 5 || index % 7 == 6) l[index].classList.add("weekend");
+    getWeekDays() {
+        return ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
     }
 
-    shell.insertAdjacentElement("afterBegin", calender);
-    shell.insertAdjacentElement("afterBegin", monthName);
-    elem.after(shell);
-}
+    prevMonth() {
+        // Переключаемся на предыдущий месяц
+        this.date = new Date(this.date.getFullYear(), this.date.getMonth() - 1, 1);
+        this.container.innerHTML = "";
+        this.render();
+    }
 
-function getDayName(date) {
-    const keepDate = date.getDate();
-    date.setDate(1);
-    const ans = date.getDay();
-    date.setDate(keepDate);
-    return ans;
-}
+    nextMonth() {
+        // Переключаемся на следующий месяц
+        this.date = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1);
+        this.container.innerHTML = "";
+        this.render();
+    }
 
-function getCountDaysLastMonth(date) {
-    const keepDate = date.getDate();
-    date.setDate(0);
-    const ans = date.getDate();
-    date.setDate(keepDate + date.getDate());
-    return ans;
-}
+    getMonthName(monthNumber) {
+        const monthNames = [
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь",
+        ];
 
-function getCountDaysCurMonth(date) {
-    const keepDate = date.getDate();
-    date.setMonth(date.getMonth() + 1);
-    date.setDate(0);
-    const ans = date.getDate();
-    date.setDate(keepDate);
-    return ans;
-}
+        return monthNames[monthNumber];
+    }
 
-function getDate() {
-    return ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-}
+    getDaysInMonth(month, year) {
+        return new Date(year, month + 1, 0).getDate();
+    }
 
-function getNameMonth(month) {
-    let dict = {
-        0: "январь",
-        1: "февраль",
-        2: "март",
-        3: "апрель",
-        4: "май",
-        5: "июнь",
-        6: "июль",
-        7: "август",
-        8: "сентябрь",
-        9: "октябрь",
-        10: "ноябрь",
-        11: "декабрь",
-    };
-    return dict[month].toUpperCase();
+    padZero(number) {
+        if (number < 10) {
+            return "0" + number;
+        } else {
+            return number;
+        }
+    }
 }

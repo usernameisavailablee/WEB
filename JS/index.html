@@ -6,16 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lab1</title>
   <link rel="stylesheet" href="styles/style.css" />
-
 </head>
 <body>
 <div class="layout_container">
-  <header>
-
-  </header>
-
+  <header></header>
   <main class="flex-container">
-
     <section class="flex-container section2">
       <div id="dateTimeBtn" type="button" class="btn btn-one">
         <span>Задание 1 - Дата\время</span>
@@ -23,16 +18,115 @@
     </section>
 
     <section class="flex-container">
-      <div id="calenderBtn" type="button" class="btn btn-one">
+      <div id="calendarBtn" type="button" class="btn btn-one">
         <span>Задание 2 - Календарь</span>
       </div>
+      <div id="calendar"></div>
     </section>
-  </main>
 
+    <section class="flex-container">
+      <div id="formCount" class="formCount"></div>
+      <div>
+        <button id="formCountBtn" type="button" class="btn btn-one">
+          Показать количество форм
+        </button>
+      </div>
+    </section>
+
+    <div id="myBlock" class="animated-block"></div>
+
+    <div>
+      <button id="addListBtn" type="button" class="btn btn-one">
+        Добавить пункт в список
+      </button>
+      <button id="removeListBtn" type="button" class="btn btn-one">
+        Удалить пункт из списка
+      </button>
+    </div>
+    <div id="listContainer">
+      <ul></ul>
+    </div>
+
+    <div>
+      <button id="addTableBtn" type="button" class="btn btn-one">
+        Добавить строку в таблицу
+      </button>
+      <button id="removeTableBtn" type="button" class="btn btn-one">
+        Удалить строку из таблицы
+      </button>
+    </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <th>Ячейка 1</th>
+          <th>Ячейка 2</th>
+          <th>Ячейка 3</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <button id="menuButton" type="button" class="btn btn-one">Меню</button>
+    <ul id="menuList">
+      <li>Шоколадка</li>
+      <li>Мёд</li>
+      <li>дёготь</li>
+    </ul>
+    <p id="message" style="display: none;">Сладости закончились</p>
+
+    <div class="image-container">
+      <img id="fadeImage" src="./img/tiny.png" alt="Fade Image" class="fade-image" />
+      <div id="textBehind" class="text-behind">
+        <p>Раком саком(камень бьёт что угодно)</p>
+      </div>
+    </div>
+
+    <form>
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" required>
+
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" required>
+
+      <label for="confirmPassword">Подтверждение пароля:</label>
+      <input type="password" id="confirmPassword" required>
+
+      <label for="skills">Навыки:</label>
+      <select id="skills" multiple>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="javascript">JavaScript</option>
+        <!-- Другие варианты навыков -->
+      </select>
+
+      <label for="checkboxSkills">Выберите навыки:</label>
+      <div id="checkboxSkills">
+        <label>
+          <input type="checkbox" name="skill" value="html"> HTML
+        </label>
+        <label>
+          <input type="checkbox" name="skill" value="css"> CSS
+        </label>
+        <label>
+          <input type="checkbox" name="skill" value="javascript"> JavaScript
+        </label>
+        <!-- Другие варианты навыков -->
+      </div>
+
+      <label for="additionalInfo">Дополнительные сведения:</label>
+      <textarea id="additionalInfo"></textarea>
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+
+
+
+
+  </main>
   <footer></footer>
 </div>
-
-<script type="module" src="./main.js">
-</script>
+<script type="module" src="./main.js"></script>
 </body>
 </html>
