@@ -211,3 +211,6 @@ form.addEventListener("submit", (event) => {
         event.preventDefault(); // Отменить отправку формы при невалидном пароле
     }
 });
+
+//10
+

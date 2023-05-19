@@ -156,6 +156,9 @@ label {
 
 input[type="email"],
 input[type="password"],
+input[type = "text"],
+input[type = "tel"],
+input[type = "date"],
 textarea {
     width: 100%;
     padding: 10px;
@@ -166,6 +169,9 @@ textarea {
 
 input[type="email"]:focus,
 input[type="password"]:focus,
+input[type = "text"],
+input[type = "tel"],
+input[type = "date"],
 textarea:focus {
     border-color: #4e4429;
 }
