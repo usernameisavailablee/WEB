@@ -1,7 +1,7 @@
 
 @import url("layout.css");
-@import url("/components/calendar/calendar.css");
-@import url("/components/dateTime/dateTime.css");
+@import url("../components/calendar/calendar.css");
+@import url("../components/dateTime/dateTime.css");
 
 * {
     padding: 0%;

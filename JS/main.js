@@ -5,7 +5,7 @@ let flagcalendar = 0;
 const calendarBtn = document.getElementById("calendarBtn");
 const calendarContainer = document.getElementById("calendar");
 const formCount = document.getElementById("formCount");
-
+//const in = document.createElement("input")
 calendarBtn.addEventListener("click", () => {
     if (flagcalendar == 0) {
         const calendar = new Calendar(calendarContainer);
@@ -219,28 +219,49 @@ function rockPaperScissorsGame() {
     const choices = ["камень", "ножницы", "бумага"];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
 
-    const userChoice = prompt("Выберите: камень, ножницы или бумага:").toLowerCase();
+    const userChoiceInput = document.createElement("input");
+    userChoiceInput.type = "text";
+    userChoiceInput.placeholder = "Выберите: камень, ножницы или бумага";
 
-    if (!choices.includes(userChoice)) {
-        alert("Пожалуйста, выберите из предложенных вариантов: камень, ножницы или бумага.");
-        return;
-    }
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
 
-    alert(`Вы выбрали: ${userChoice}\nКомпьютер выбрал: ${computerChoice}`);
+    const resultElement = document.createElement("p");
 
-    if (userChoice === computerChoice) {
-        alert("Ничья!");
-    } else if (
-        (userChoice === "камень" && computerChoice === "ножницы") ||
-        (userChoice === "ножницы" && computerChoice === "бумага") ||
-        (userChoice === "бумага" && computerChoice === "камень")
-    ) {
-        alert("Вы выиграли!");
-    } else {
-        alert("Компьютер выиграл!");
-    }
+    const form = document.createElement("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const userChoice = userChoiceInput.value.toLowerCase();
+
+        if (!choices.includes(userChoice)) {
+            resultElement.textContent = "Пожалуйста, выберите из предложенных вариантов: камень, ножницы или бумага.";
+            return;
+        }
+
+        resultElement.textContent = `Вы выбрали: ${userChoice}\nКомпьютер выбрал: ${computerChoice}`;
+
+        if (userChoice === computerChoice) {
+            resultElement.textContent += "\nНичья!";
+        } else if (
+            (userChoice === "камень" && computerChoice === "ножницы") ||
+            (userChoice === "ножницы" && computerChoice === "бумага") ||
+            (userChoice === "бумага" && computerChoice === "камень")
+        ) {
+            resultElement.textContent += "\nВы выиграли!";
+        } else {
+            resultElement.textContent += "\nКомпьютер выиграл!";
+        }
+    });
+
+    form.appendChild(userChoiceInput);
+    form.appendChild(submitButton);
+
+    document.body.appendChild(form);
+    document.body.appendChild(resultElement);
 }
 
 // Вызов игры "Камень, ножницы, бумага"
 rockPaperScissorsGame();
+
 
