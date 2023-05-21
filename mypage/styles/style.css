@@ -1,0 +1,141 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    min-height: 100vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+header,
+footer {
+    background-color: #2a304d;
+    height: 50px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: #111111;
+}
+
+section {
+    margin: 20px 0;
+}
+
+.section1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    position: relative;
+    margin-left: 600px;
+}
+
+.section1 img {
+    position: absolute;
+    top: 50px;
+    left: -300px;
+    z-index: 1;
+}
+
+.section1 .mygreyblock {
+    position: relative;
+    z-index: 2;
+    height: 669px;
+    width: 534px;
+}
+
+.forheadingrey {
+    padding-top: 300px;
+    color: #2a314e;
+    font-size: 75px;
+    position: relative;
+    font-family: 'Fjalla One', sans-serif;
+    z-index: 2;
+}
+
+.forcontentingrey {
+    margin-top: 20px;
+    color: #111111;
+    font-size: 18px;
+    font-family: 'Fjalla One', sans-serif;
+    font-style: italic;
+    font-weight: 10;
+    position: relative;
+    z-index: 2;
+}
+
+.forbuttoningrey {
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: #ffd900;
+    color: black;
+    border: none;
+    width: 200px;
+    height: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.forsignnatureingrey {
+    margin-top: 70px;
+    color: #111111;
+    font-size: 18px;
+    font-family: 'Fjalla One', sans-serif;
+    font-style: italic;
+    font-weight: 10;
+    position: relative;
+    z-index: 2;
+}
+
+.section2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    gap: 170px;
+    max-width: 1000px;
+}
+
+.section2_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    gap: 20px;
+    max-width: 300px;
+}
+
+.section2_H1 {
+    font-family: 'Fjalla One', serif;
+    color: #2a304d;
+    font-weight: 400;
+    font-size: 2.5555555555555554rem;
+}
+
+.section2_p {
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px 0 35px;
+}
+
+@media screen and (max-width: 900px) {
+    .section2 {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+
+.gray-block {
+    background-color: #dfe5e1;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
